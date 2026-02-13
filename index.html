@@ -3,157 +3,165 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>عيد ميلاد حبيبتي ❤️</title>
+<title>14/02/2026 ❤️</title>
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
-body{overflow:hidden;background:#000;color:white;text-align:center;}
 
-/* شاشة الألعاب النارية */
-#fireworksScreen{
-  position:fixed; top:0; left:0; width:100%; height:100%;
-  background:#000; display:flex; justify-content:center; align-items:center;
-  flex-direction:column; z-index:2;
+body{
+  background:url("bg.jpg") no-repeat center center/cover;
+  height:100vh;
+  overflow-x:hidden;
+  color:white;
 }
-#fireworksScreen h1{
-  font-size:36px; margin-bottom:10px;
+
+/* طبقة Blur */
+.blur{
+  position:fixed;
+  width:100%;
+  height:100%;
+  backdrop-filter:blur(8px);
+  background:rgba(0,0,0,0.5);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
+  padding:20px;
+}
+
+/* زر البداية */
+#startBtn{
+  padding:15px 30px;
+  font-size:18px;
+  border:none;
+  border-radius:30px;
+  background:#ff4e50;
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
+}
+#startBtn:hover{background:#ff1e30;}
+
+/* المحتوى الرئيسي */
+.content{display:none;}
+
+h1{
+  font-size:40px;
+  margin:15px 0;
   animation:glow 2s infinite alternate;
 }
-#fireworksScreen p{font-size:24px; margin-bottom:20px;}
-@keyframes glow{from{text-shadow:0 0 10px #ffdd00;}to{text-shadow:0 0 30px #ff00aa;}}
-
-/* المحتوى */
-.blur{
-  display:none; position:fixed; width:100%; height:100%;
-  backdrop-filter:blur(8px); background:rgba(0,0,0,0.5);
-  display:flex; justify-content:center; align-items:center;
-  flex-direction:column; text-align:center; padding:20px; z-index:1;
+@keyframes glow{
+  from{text-shadow:0 0 10px white;}
+  to{text-shadow:0 0 25px pink;}
 }
 
-img.slideImage{
-  max-width:80%;
-  max-height:60vh;
+#countdown{
+  font-size:22px;
+  margin:10px 0 20px;
+}
+
+/* عرض الصور */
+.photo-btn{
+  padding:10px 20px;
+  margin:5px;
+  font-size:16px;
+  border:none;
   border-radius:20px;
-  box-shadow:0 0 50px rgba(255,0,150,0.8);
+  background:#ff4e50;
+  cursor:pointer;
+  transition:0.3s;
+}
+.photo-btn:hover{background:#ff1e30;}
+
+/* نافذة عرض الصورة */
+.modal{
   display:none;
-  margin:20px auto;
-  opacity:0;
-  transition:opacity 1s, transform 1s;
+  position:fixed;
+  z-index:100;
+  left:0; top:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.9);
+  justify-content:center;
+  align-items:center;
 }
-img.slideImage.show{
-  display:block;
-  opacity:1;
-  transform:scale(1.05);
+.modal img{
+  max-width:90%;
+  max-height:80%;
+  border-radius:20px;
+  box-shadow:0 0 30px rgba(255,255,255,0.8);
 }
 
-#finalHeart{
-  display:none; font-size:50px; margin-top:30px;
-  color:#ff4e50; animation:beat 1s infinite alternate, glow 2s infinite alternate;
+/* قلوب متحركة */
+.heart{
+  position:fixed;
+  bottom:-10px;
+  font-size:20px;
+  animation:float 5s linear infinite;
 }
-@keyframes beat{from{transform:scale(1);}to{transform:scale(1.2);}}
-
-.heart{position:fixed;bottom:-10px;font-size:20px;animation:float 5s linear infinite;}
-@keyframes float{from{transform:translateY(0);opacity:1;}to{transform:translateY(-100vh);opacity:0;}}
-
-#countdown{font-size:22px;margin:10px 0 20px;}
-.star{
-  position:absolute; width:2px; height:2px; background:white; border-radius:50%;
-  animation:twinkle 2s infinite alternate;
+@keyframes float{
+  from{transform:translateY(0);opacity:1;}
+  to{transform:translateY(-100vh);opacity:0;}
 }
-@keyframes twinkle{from{opacity:0.3;}to{opacity:1;}}
 </style>
 </head>
+
 <body>
 
-<!-- شاشة الألعاب النارية -->
-<div id="fireworksScreen">
-<h1>عيد ميلاد حبيبتي ❤️</h1>
-<p>ديما أنا معاك 💌</p>
-<canvas id="fireworksCanvas" width="800" height="400"></canvas>
-</div>
-
-<!-- المحتوى الرئيسي -->
 <div class="blur">
+
+<button id="startBtn">اضغط هنا لتبدأ المفاجأة ❤️</button>
+
 <div class="content">
 <h2>🎂❤️ عيد ميلاد سعيد & عيد حب سعيد ❤️🎂</h2>
 <h1>إلى أغلى ما عندي</h1>
 <p>أميرتي و سندي</p>
 <p>14 / 02 / 2026</p>
+
 <div id="countdown"></div>
 
-<div id="slidesContainer">
-  <img class="slideImage" src="images/photo1.jpeg">
-  <img class="slideImage" src="images/photo2.jpeg">
-  <img class="slideImage" src="images/photo3.jpeg">
-  <img class="slideImage" src="images/photo4.jpeg">
-  <img class="slideImage" src="images/photo5.jpeg">
-  <img class="slideImage" src="images/photo6.jpeg">
-  <img class="slideImage" src="images/photo7.jpeg">
-  <img class="slideImage" src="images/photo8.jpeg">
-  <img class="slideImage" src="images/photo9.jpeg">
-  <img class="slideImage" src="images/photo10.jpg">
+<!-- أزرار الصور -->
+<div id="photoButtons">
+  <button class="photo-btn" data-img="photo 1.jpeg">+ صورة 1</button>
+  <button class="photo-btn" data-img="photo 2.jpeg">+ صورة 2</button>
+  <button class="photo-btn" data-img="photo 3.jpeg">+ صورة 3</button>
+  <button class="photo-btn" data-img="photo 4.jpeg">+ صورة 4</button>
+  <button class="photo-btn" data-img="photo 5.jpeg">+ صورة 5</button>
+  <button class="photo-btn" data-img="photo 6.jpeg">+ صورة 6</button>
+  <button class="photo-btn" data-img="photo 7.jpeg">+ صورة 7</button>
+  <button class="photo-btn" data-img="photo 8.jpeg">+ صورة 8</button>
+  <button class="photo-btn" data-img="photo 9.jpeg">+ صورة 9</button>
+  <button class="photo-btn" data-img="photo 10.jpg">+ صورة 10</button>
 </div>
 
-<div id="finalHeart">💖 شحال كنبغيك أبنتي زوينة 🥰 💖</div>
 </div>
 </div>
 
-<!-- الموسيقى YouTube -->
-<iframe id="musicFrame" width="0" height="0" 
-src="https://www.youtube.com/embed/0EMd_VrKJAg?autoplay=1&loop=1&playlist=0EMd_VrKJAg" 
-frameborder="0" allow="autoplay; encrypted-media"></iframe>
+<!-- نافذة الصورة -->
+<div id="modal" class="modal">
+  <img id="modalImg" src="">
+</div>
+
+<!-- موسيقى -->
+<div class="music">
+<iframe id="musicFrame" width="0" height="0"
+src=""
+frameborder="0"
+allow="autoplay">
+</iframe>
+</div>
 
 <script>
-// ===== نجوم متوهجة =====
-for(let i=0;i<50;i++){
-  let star=document.createElement("div");
-  star.classList.add("star");
-  star.style.top=Math.random()*100+"vh";
-  star.style.left=Math.random()*100+"vw";
-  star.style.width=Math.random()*2+1+"px";
-  star.style.height=star.style.width;
-  document.body.appendChild(star);
+// زر البداية
+document.getElementById("startBtn").onclick=function(){
+  this.style.display="none";
+  document.querySelector(".content").style.display="block";
+
+  // تشغيل الموسيقى
+  document.getElementById("musicFrame").src=
+  "https://www.youtube.com/embed/0EMd_VrKJAg?autoplay=1&loop=1&playlist=0EMd_VrKJAg";
 }
-
-// ===== الألعاب النارية =====
-const canvas=document.getElementById("fireworksCanvas");
-const ctx=canvas.getContext("2d");
-let particles=[];
-function random(min,max){return Math.random()*(max-min)+min;}
-function createFirework(){for(let i=0;i<50;i++){particles.push({x:random(100,700),y:200,vx:random(-3,3),vy:random(-5,-1),alpha:1,color:`hsl(${Math.random()*360},100%,50%)`});}}
-function updateParticles(){ctx.clearRect(0,0,canvas.width,canvas.height);for(let p of particles){p.x+=p.vx;p.y+=p.vy;p.vy+=0.05;p.alpha-=0.02;if(p.alpha<=0) continue;ctx.globalAlpha=p.alpha;ctx.fillStyle=p.color;ctx.beginPath();ctx.arc(p.x,p.y,3,0,Math.PI*2);ctx.fill();}particles=particles.filter(p=>p.alpha>0);}
-let fwInterval=setInterval(()=>{createFirework();updateParticles();},100);
-
-// بعد 5 ثواني اختفاء الألعاب النارية وظهور المحتوى + الموسيقى
-setTimeout(()=>{
-  document.getElementById("fireworksScreen").style.display="none";
-  document.querySelector(".blur").style.display="flex";
-
-  // تشغيل الموسيقى YouTube
- <iframe id="musicFrame" width="0" height="0" 
-src="https://www.youtube.com/embed/0EMd_VrKJAg?autoplay=1&loop=1&playlist=0EMd_VrKJAg" 
-frameborder="0" allow="autoplay; encrypted-media"></iframe>
-
-  // ===== عرض الصور واحدة بوحدة مع اختفاء السابقة =====
-  const slides=document.querySelectorAll(".slideImage");
-  let idx=0;
-
-  function showNextImage(){
-    if(idx<slides.length){
-      let img=slides[idx];
-      img.classList.add("show");
-
-      setTimeout(()=>{
-        img.classList.remove("show");
-        idx++;
-        showNextImage();
-      },3000); // مدة ظهور الصورة 3 ثواني
-    } else{
-      document.getElementById("finalHeart").style.display="block";
-    }
-  }
-
-  showNextImage();
-},5000);
 
 // عداد تنازلي
 var countDate=new Date("Feb 14, 2026 00:00:00").getTime();
@@ -164,8 +172,25 @@ setInterval(function(){
   var hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
   var minutes=Math.floor((distance%(1000*60*60))/(1000*60));
   var seconds=Math.floor((distance%(1000*60))/1000);
-  document.getElementById("countdown").innerHTML="باقي: "+days+" يوم "+hours+" ساعة "+minutes+" دقيقة "+seconds+" ثانية";
+  document.getElementById("countdown").innerHTML=
+  "باقي: "+days+" يوم "+hours+" ساعة "+minutes+" دقيقة "+seconds+" ثانية";
 },1000);
+
+// فتح الصور عند الضغط
+var buttons=document.querySelectorAll(".photo-btn");
+var modal=document.getElementById("modal");
+var modalImg=document.getElementById("modalImg");
+
+buttons.forEach(btn=>{
+  btn.onclick=function(){
+    modal.style.display="flex";
+    modalImg.src=this.dataset.img;
+  }
+});
+
+modal.onclick=function(){
+  modal.style.display="none";
+}
 
 // قلوب متحركة
 function createHeart(){
@@ -179,7 +204,6 @@ function createHeart(){
 }
 setInterval(createHeart,300);
 </script>
+
 </body>
 </html>
-
-
